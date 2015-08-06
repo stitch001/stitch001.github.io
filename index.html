@@ -1,139 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?265044ef5794e97d3aaec6691e766905";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
 <head>
-    <title>no Title</title>
-    <meta charset="UTF-8" />
-    <script src="jquery-2.0.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="theme.css" />
-    <link href="bootstrap-theme.min.css" rel="stylesheet" />
-    <script src="main.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
     <script>
-        $(function () {
-            addButtonEvents();
-            //1.输出
-            generate();
-            var mayLose = false;
-            generate();
-            //
-            print();
-            $(window).keyup(function(e){
-            	restoreState();
-				//2.压缩
-                if (press(e.keyCode)) {
-                    //3.合并
-                    combine(e.keyCode);
-                    //4.压缩
-                    press(e.keyCode);
-                    //5.生成新块儿
-                    mayLose = generate();
-                   
-                } else if (combine(e.keyCode)) {
-                    //4.压缩
-                    press(e.keyCode);
-                    //5.生成新块儿
-                    mayLose = generate();
-                }
-                print();
-                //6.判断是否死
-                if (mayLose) {
-                    if (isLose())
-                    {
-                       
-                        alert("Game Over!");
-                    }
-                }
-				print();//输出
-                
-            });
-        });
-
-        //增加按钮事件
-        function addButtonEvents()
+        window.onload = function ()
         {
-            $("#btn_undo").on({
-                "click": function () {
-                    undoState();
-                    print();
-
-                }
-            });
-
-            $("#btn_new").on({
-                "click": function () {
-                    isAlert = !isAlert;
-                    showHideDiv();
-                }
-            });
-
-            $("#confirmNo").on({
-                "click": function () {
-                    isAlert = !isAlert;
-                    showHideDiv();
-                }
-            });
+            for (var i = 0 ; i < 30 ; i++)
+            {
+                alert("tfboys 大傻B "
+                    + i +"~~~");
+            }
         }
+
     </script>
 </head>
 <body>
-    <!-- background confirm start-->
-    <div class="bg" id="bgConfirm">
-        <div id="confirmDialog">
-            <div id="confirmBanner"><span class="fontArial">Are you sure?</span></div>
-            <div id="confirmButtons">
-                <button class="buttonBase confirmBt btnUndo" id="confirmYes">Yes</button>
-                <button class="buttonBase confirmBt btnNew" id="confirmNo">No</button>
-            </div>
-            
-        </div>
-    </div>
-    <!-- background confirm end-->
-    <!-- background gameover start-->
-    <!-- background gameover end-->
-
-
-    <!-- head start-->
-    <div id="headerDiv" >
-        <span id="score_span" class="fontArial">SCORE</span>
-        <span id="score_num" class="fontArial" >0</span>
-    </div>
-    <!-- headend-->
-
-    <!-- main blocks start-->
-    <div class="area">
-        <div class="left">
-            <div id="0_0" class="common"></div><div id="0_1" class="common"></div><div id="0_2" class="common"></div><div id="0_3" class="common"></div>
-        </div>
-        <div class="left">
-            <div id="1_0" class="common"></div><div id="1_1" class="common"></div><div id="1_2" class="common"></div><div id="1_3" class="common"></div>
-        </div>
-        <div class="left">
-            <div id="2_0" class="common"></div><div id="2_1" class="common"></div><div id="2_2" class="common"></div><div id="2_3" class="common"></div>
-        </div>
-        <div class="left">
-            <div id="3_0" class="common"></div><div id="3_1" class="common"></div><div id="3_2" class="common"></div><div id="3_3" class="common"></div>
-        </div>
-    </div>
-    <!-- main blocks end-->
-
-    <!-- footer buttons start-->
-	<div id="divButtonBanner">
-        <button class="buttonBase btnUndo" id="btn_undo">UNDO</button>
-        <button class="buttonBase btnNew" id="btn_new">NEW</button>
-        <button class="buttonBase btnSubmit" id="btn_submit">SUBMIT</button>		
-	</div>
-    <!--footer buttons end-->
 
 </body>
-
-
 </html>
