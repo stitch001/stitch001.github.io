@@ -107,6 +107,7 @@ button.buttonBase {
     z-index:-999;
     background-color:rgba(92, 84, 84, 0);
     position:absolute;
+    top:0;
     margin:0;
     display:none;
 }
