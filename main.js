@@ -2,9 +2,10 @@
 
 
 var M = 4;
-//var intarr = [[16, 4, 2, 0], [8, 64, 16, 32], [32, 2, 128, 2], [2, 4, 2, 2]];
-var intarr = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-var arrStack = [];
+score = 0;
+//intarr = [[16, 4, 2, 0], [8, 64, 16, 32], [32, 2, 128, 2], [2, 4, 2, 2]];
+intarr = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+arrStack = [];
 var scoreStack = [];
 var isAlert = false;
 
@@ -35,7 +36,11 @@ function undoState()
 
         }
     }
-	
+    var scorebak = scoreStack.pop();
+    if (!(scorebak === undefined))
+    {
+        score = scorebak;
+    }
 }
 
 //获取一个新的数组
@@ -195,6 +200,14 @@ function press(dir) {
     return move;
 }
 
+function  newGame() {
+    intarr = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    arrStack = [];
+    generate();
+    generate();
+    print();
+}
+
 function generate()
 {
     var mayLose = false;
@@ -248,9 +261,9 @@ function isLose()
     
 }
 
-function showHideDiv()
+function showHideDiv(divid)
 {
-    var bgDiv = $("#bgConfirm");
+    var bgDiv = $("#"+divid);
     var cssBack = { "display":"none", "z-index": -999, "background-color": "transparent" };
     var cssFront = { "display": "block", "z-index": 1, "background-color": "rgba(92, 84, 84, 0.73)" }
     if (isAlert) {
@@ -258,4 +271,14 @@ function showHideDiv()
     } else {
         bgDiv.css(cssBack);
     }
+}
+
+function addScore(){
+    scoreStack.push(score);
+    score +=2;
+}
+
+//展示分数
+function printScore(){
+    $("#score_num").html(score);
 }

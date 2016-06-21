@@ -1,17 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?265044ef5794e97d3aaec6691e766905";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
 <head>
-    <title>no Title</title>
+    <title>2048 salute to Three!</title>
     <meta charset="UTF-8" />
     <script src="jquery-2.0.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="theme.css" />
@@ -24,9 +14,13 @@ var _hmt = _hmt || [];
             generate();
             var mayLose = false;
             generate();
+            window.lost = false;
             //
             print();
             $(window).keyup(function(e){
+                if (window.lost){
+                    return;
+                }
             	restoreState();
 				//2.压缩
                 if (press(e.keyCode)) {
@@ -36,24 +30,29 @@ var _hmt = _hmt || [];
                     press(e.keyCode);
                     //5.生成新块儿
                     mayLose = generate();
-                   
+                    addScore();
+                    printScore()
+
                 } else if (combine(e.keyCode)) {
                     //4.压缩
                     press(e.keyCode);
                     //5.生成新块儿
                     mayLose = generate();
+                    printScore()
                 }
                 print();
+
                 //6.判断是否死
                 if (mayLose) {
                     if (isLose())
                     {
-                       
-                        alert("Game Over!");
+                        isAlert = !isAlert;
+                        showHideDiv("bgGameOver");
+                        window.lost = true;
                     }
                 }
 				print();//输出
-                
+
             });
         });
 
@@ -64,22 +63,42 @@ var _hmt = _hmt || [];
                 "click": function () {
                     undoState();
                     print();
-
+                    printScore();
                 }
             });
 
             $("#btn_new").on({
                 "click": function () {
                     isAlert = !isAlert;
-                    showHideDiv();
+                    showHideDiv("bgConfirm");
                 }
             });
 
             $("#confirmNo").on({
                 "click": function () {
                     isAlert = !isAlert;
-                    showHideDiv();
+                    showHideDiv("bgConfirm");
                 }
+            });
+
+            $("#confirmYes").click(function () {
+                newGame();
+                window.lost=false;
+                isAlert = !isAlert;
+                showHideDiv("bgConfirm");
+            });
+
+            $("#gameoverOK").click(function () {
+                window.lost=false;
+                isAlert = !isAlert;
+                showHideDiv("bgGameOver");
+            });
+
+            $("#gameoverNew").click(function () {
+                newGame();
+                window.lost=false;
+                isAlert = !isAlert;
+                showHideDiv("bgGameOver");
             });
         }
     </script>
@@ -87,9 +106,9 @@ var _hmt = _hmt || [];
 <body>
     <!-- background confirm start-->
     <div class="bg" id="bgConfirm">
-        <div id="confirmDialog">
-            <div id="confirmBanner"><span class="fontArial">Are you sure?</span></div>
-            <div id="confirmButtons">
+        <div class="confirmDialog">
+            <div class="confirmBanner"><span class="fontArial">Are you sure?</span></div>
+            <div class="confirmButtons">
                 <button class="buttonBase confirmBt btnUndo" id="confirmYes">Yes</button>
                 <button class="buttonBase confirmBt btnNew" id="confirmNo">No</button>
             </div>
@@ -98,6 +117,15 @@ var _hmt = _hmt || [];
     </div>
     <!-- background confirm end-->
     <!-- background gameover start-->
+    <div class="bg" id="bgGameOver">
+        <div class="confirmDialog">
+            <div class="confirmBanner"><span class="fontArial">Game Over</span><br/><sub>Press Undo to back</sub></div>
+            <div class="confirmButtons">
+                <button class="buttonBase confirmBt btnUndo" id="gameoverOK">OK</button>
+                <button class="buttonBase confirmBt btnNew" id="gameoverNew">New</button>
+            </div>
+        </div>
+    </div>
     <!-- background gameover end-->
 
 
@@ -128,8 +156,7 @@ var _hmt = _hmt || [];
     <!-- footer buttons start-->
 	<div id="divButtonBanner">
         <button class="buttonBase btnUndo" id="btn_undo">UNDO</button>
-        <button class="buttonBase btnNew" id="btn_new">NEW</button>
-        <button class="buttonBase btnSubmit" id="btn_submit">SUBMIT</button>		
+        <button class="buttonBase btnNew" id="btn_new">NEW</button>	
 	</div>
     <!--footer buttons end-->
 

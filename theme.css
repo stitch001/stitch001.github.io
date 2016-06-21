@@ -111,7 +111,7 @@ button.buttonBase {
     display:none;
 }
 
-#confirmDialog {
+.confirmDialog {
     border-radius:10px;
     width:300px;
     margin: 200px auto;
@@ -122,15 +122,16 @@ span.fontArial {
     font-family:Arial;
 }
 
-#confirmBanner {
+.confirmBanner {
     font-size:20pt;
     text-align:center;
     line-height:100px;
 }
 
-#confirmButtons {
+.confirmButtons {
     text-align:center;
 }
-#confirmButtons > .confirmBt {
-    width:60px;
+.confirmButtons > .confirmBt {
+    padding: 3px;
+    width:auto;
 }
