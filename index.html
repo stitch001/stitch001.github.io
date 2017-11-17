@@ -23,11 +23,12 @@
                 if (window.lost){
                     return;
                 }
-                restoreState();
+                
                 
                 var moveCode = undefined
                 if (e.type == "keyup"){
                     moveCode = e.keyCode
+                    restoreState();
                 }else if (e.type == "touchend"){
                     var touchendX = e.originalEvent.changedTouches[0].clientX
                     var touchendY = e.originalEvent.changedTouches[0].clientY
@@ -51,6 +52,7 @@
                     }else{
                         return
                     }
+                    restoreState();
                 }else if (e.type == "touchstart"){
                     touchStartX = e.originalEvent.touches[0].clientX
                     touchStartY = e.originalEvent.touches[0].clientY
